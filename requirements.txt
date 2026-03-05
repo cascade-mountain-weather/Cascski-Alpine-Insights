@@ -1,4 +1,4 @@
-# Python requirements for weather data collection and verification scripts
+# Python requirements for weather data collection and evaluation scripts
 # Install with: pip install -r requirements.txt
 
 # Web scraping and API requests
@@ -11,6 +11,7 @@ beautifulsoup4>=4.12.0
 pandas>=2.0.0
 
 selenium
+webdriver-manager>=3.8.6
 
 # Optional but recommended:
 # matplotlib>=3.7.0  # For generating charts/plots

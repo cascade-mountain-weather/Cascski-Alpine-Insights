@@ -1,0 +1,12 @@
+{
+    "observed_snowfall": 8.0,
+    "estimated_range": [
+        4.8,
+        15.0
+    ],
+    "source": "909:WA:SNTL",
+    "snow_level_range": [
+        3910.76128,
+        8415.3546
+    ]
+}
