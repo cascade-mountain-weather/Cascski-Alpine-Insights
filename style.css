@@ -33,9 +33,25 @@ header h1 {
     margin-bottom: 0.5rem;
 }
 
+.cmw-header-logo-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: translateY(-0.35rem);
+}
+
+.cmw-header-main-logo {
+    width: min(185px, 33vw);
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.25));
+}
+
 .tagline {
     font-size: 1.1rem;
     opacity: 0.9;
+    margin-bottom: 0.8rem;
 }
 
 /* Buy Me a Coffee Button */
@@ -61,6 +77,14 @@ header h1 {
 }
 
 @media (max-width: 768px) {
+    .cmw-header-main-logo {
+        width: clamp(88px, 30vw, 135px);
+    }
+
+    .tagline {
+        font-size: 1rem;
+    }
+
     .buy-coffee-btn {
         top: 0.5rem;
         right: 0.5rem;
@@ -68,6 +92,12 @@ header h1 {
     
     .buy-coffee-btn img {
         height: 28px;
+    }
+}
+
+@media (max-width: 480px) {
+    .cmw-header-main-logo {
+        width: clamp(78px, 28vw, 110px);
     }
 }
 
@@ -512,6 +542,84 @@ figure img {
     margin: 0; /* no margins */
 }
 
+/* Simple UTC -> Pacific time conversion guide for Utah meteogram PNGs. */
+.utah-image-wrap {
+    position: relative;
+    width: 100%;
+    margin: 0.75rem auto;
+}
+
+.utah-image-wrap img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    margin: 0;
+}
+
+.time-scale-container {
+    display: flex;
+    flex-direction: column;
+    align-self: stretch;
+    width: 100%;
+    max-width: 1100px;
+    gap: 0.4rem;
+    padding: 0.5rem;
+    margin-top: 0.9rem;
+    margin-left: auto;
+    margin-right: auto;
+    background: rgba(241, 245, 249, 0.8);
+    border: 1px solid rgba(15, 23, 42, 0.15);
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    box-sizing: border-box;
+}
+
+.scale-title {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #0f172a;
+    letter-spacing: 0.03em;
+    margin-bottom: 0.1rem;
+}
+
+.time-scale {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+}
+
+.scale-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: #1e3a8a;
+    letter-spacing: 0.05em;
+}
+
+.scale-bar {
+    position: relative;
+    height: 0.9rem;
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(15, 23, 42, 0.2);
+    border-radius: 2px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.scale-tick {
+    font-size: 0.55rem;
+    font-weight: 600;
+    color: #475569;
+    white-space: nowrap;
+    padding: 0 0.1rem;
+    margin: 0;
+    line-height: 1;
+    letter-spacing: -0.01em;
+    flex-shrink: 0;
+}
+
 /* Synoptic tools grid: two columns (GFS left, ECMWF right) with multiple rows.
      Each .tool-card holds a product title and an image. On narrow screens the
      layout collapses to a single column. */
@@ -621,8 +729,68 @@ figcaption { margin: 0; padding: 0; }
 
 /* Tighten control button spacing */
 .ivt-controls {
-    margin: 0.25rem 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+    margin: 0.35rem 0 0.2rem;
     padding: 0;
+}
+
+.ivt-controls button {
+    border: 1px solid #1e3c72;
+    background: #f8fbff;
+    color: #1e3c72;
+    border-radius: 999px;
+    padding: 0.3rem 0.72rem;
+    min-height: 30px;
+    font-size: 0.84rem;
+    font-weight: 700;
+    line-height: 1;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+}
+
+.ivt-controls button:hover {
+    background: #1e3c72;
+    color: #ffffff;
+    box-shadow: 0 2px 8px rgba(30, 60, 114, 0.25);
+}
+
+.ivt-controls button:active {
+    transform: translateY(1px);
+}
+
+.ivt-controls button:focus-visible {
+    outline: 2px solid #60a5fa;
+    outline-offset: 2px;
+}
+
+.ivt-controls span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 3.8rem;
+    min-height: 30px;
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+    background: #e6eefc;
+    color: #12305f;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+}
+
+@media (max-width: 640px) {
+    .ivt-controls {
+        gap: 0.3rem;
+    }
+
+    .ivt-controls button,
+    .ivt-controls span {
+        min-height: 34px;
+    }
 }
 /* Responsive Design */
 @media (max-width: 768px) {
@@ -877,3 +1045,106 @@ nav a,
   .contact-form button:hover {
     background: #0f172a;
   }
+
+.satellite-looper {
+    background: linear-gradient(180deg, #f7fbff 0%, #ecf4ff 100%);
+}
+
+.satellite-subtitle {
+    margin-bottom: 1rem;
+    color: #334155;
+}
+
+.satellite-stage {
+    width: 100%;
+    background: #0f172a;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #cbd5e1;
+}
+
+#satellite-frame {
+    display: block;
+    width: 100%;
+    height: auto;
+    min-height: 200px;
+    object-fit: contain;
+    background: #020617;
+}
+
+.satellite-controls {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(72px, auto)) 1fr;
+    gap: 0.75rem;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.satellite-controls button {
+    border: 1px solid #94a3b8;
+    background: #ffffff;
+    color: #0f172a;
+    border-radius: 6px;
+    padding: 0.5rem 0.75rem;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.satellite-controls button:disabled {
+    opacity: 0.55;
+    cursor: default;
+}
+
+#satellite-scrubber {
+    width: 100%;
+}
+
+.satellite-status {
+    margin-top: 0.75rem;
+    color: #1e3c72;
+    font-weight: 600;
+}
+
+.satellite-timing {
+    margin-top: 0.35rem;
+    color: #334155;
+    font-size: 0.95rem;
+}
+
+.satellite-links {
+    margin-top: 0.5rem;
+}
+
+.satellite-links a {
+    color: #1d4ed8;
+    text-decoration: none;
+}
+
+.satellite-links a:hover {
+    text-decoration: underline;
+}
+
+.dot-sep {
+    margin: 0 0.4rem;
+    color: #64748b;
+}
+
+@media (max-width: 768px) {
+    .satellite-controls {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    #satellite-scrubber {
+        grid-column: 1 / -1;
+    }
+
+    .dot-sep {
+        display: none;
+    }
+
+    .satellite-links a {
+        display: inline-block;
+        margin-right: 0.5rem;
+        margin-bottom: 0.5rem;
+    }
+}
